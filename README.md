@@ -2,6 +2,8 @@
 
 This branch (`workshop`) includes the implementation for exercises 1–5, taken from [https://www.pelshoff.com/workshop](https://www.pelshoff.com/workshop).
 
+Sharing it here so that the rest of my team at the workshop can access the code we wrote.
+
 Actual README for this repo is below...
 
 ---
