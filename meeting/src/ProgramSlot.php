@@ -29,4 +29,46 @@ final class ProgramSlot
         $this->title = $title;
         $this->room = $room;
     }
+
+    /**
+     * @return DateTimeImmutable
+     */
+    public function getStart(): DateTimeImmutable
+    {
+        return $this->start;
+    }
+
+    /**
+     * @return DateTimeImmutable
+     */
+    public function getEnd(): DateTimeImmutable
+    {
+        return $this->end;
+    }
+
+    /**
+     * @param DateTimeImmutable $newStart
+     */
+    public function setStart(DateTimeImmutable $newStart)
+    {
+        $this->start = $newStart;
+    }
+
+    /**
+     * @param DateTimeImmutable $newEnd
+     */
+    public function setEnd(DateTimeImmutable $newEnd)
+    {
+        $this->end = $newEnd;
+    }
+
+    public function overlapsWith(ProgramSlot $slot2)
+    {
+        if ($slot2->start < $this->end
+            && $slot2->end > $this->start) {
+            return true;
+        }
+
+        return false;
+    }
 }

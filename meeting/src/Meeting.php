@@ -28,6 +28,7 @@ final class Meeting
      * @param DateTimeImmutable $start
      * @param DateTimeImmutable $end
      * @param Program $program
+     * @throws \Exception
      */
     public function __construct(
         UuidInterface $meetingId,
@@ -38,10 +39,55 @@ final class Meeting
         Program $program
     ) {
         $this->meetingId = $meetingId;
+
+        if (empty($title)) {
+            throw new \Exception('Title cannot be empty');
+        }
+
+        if (strlen($title) < 5) {
+            throw new \Exception('Title length must be at least five characters');
+        }
+
         $this->title = $title;
         $this->description = $description;
         $this->start = $start;
+
+        if ($end < $start) {
+            throw new \Exception('End time must be after the start time');
+        }
+
         $this->end = $end;
+
+        if (count($program->getProgramSlots()) < 1) {
+            throw new \Exception('Meeting program must have at least one program slot');
+        }
+
         $this->program = $program;
+    }
+
+    public function reschedule(DateTimeImmutable $start) {
+        $diff = $this->start->diff($start);
+
+        $newStart = $this->start->add($diff);
+        $newEnd = $this->end->add($diff);
+        $this->start = $newStart;
+        $this->end = $newEnd;
+
+        $this->program->reschedule($diff);
+    }
+
+    public function getStart() : DateTimeImmutable
+    {
+        return $this->start;
+    }
+
+    public function getEnd() : DateTimeImmutable
+    {
+        return $this->end;
+    }
+
+    public function getProgram() : Program
+    {
+        return $this->program;
     }
 }
