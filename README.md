@@ -1,3 +1,11 @@
+# Notes
+
+This branch (`workshop`) includes the implementation for exercises 1–5, taken from [https://www.pelshoff.com/workshop](https://www.pelshoff.com/workshop).
+
+Actual README for this repo is below...
+
+---
+
 # TDD, DDD & Teamwork
 
 ## Before the workshop
